@@ -132,7 +132,9 @@ void Heap<T>::DeleteByValue(T &value) {
         int rightLimit = pow(2, i + 1) - 1;
         for (int j = leftLimit; j < rightLimit; ++j) {
             if (j < _heap->GetLength() && (*_heap)[j] == value) {
-                _heap->DelByIndex(j);
+                (*_heap)[i] = GetMax();
+                SiftUp(i);
+                ExtractMax();
                 return;
             }
         }
